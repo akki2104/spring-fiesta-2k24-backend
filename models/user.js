@@ -21,6 +21,10 @@ const userSchema = new Schema(
       default: "USER",
     },
     vote: String,
+    isVoted:{
+      type: Boolean,
+      default: false,
+    }
   },
   { timestamps: true }
 );
