@@ -1,10 +1,8 @@
 const { Router } = require("express");
 const User = require("../models/user");
-const { createTokenForUser } = require("../controllers/authentication.js");
 const router = Router();
 const Candidate = require("../models/candidate.js");
 const { getDataFromToken } = require("../controllers/getDataFromCookie.js");
-// to get all candidates
 
 router.get("/", async (req, res) => {
   try {
@@ -49,12 +47,7 @@ router.post("/:candidateID", async (req, res) => {
   // user can only vote once
 
   const candidateID = req.params.candidateID;
-  // const userId = req.user._id;
-  console.log(candidateID);
-  //   console.log(document.cookie);
-  //   console.log(req.user);
   const userId = getDataFromToken(req);
-  console.log(userId);
 
   try {
     // Find the Candidate document with the specified candidateID
@@ -87,27 +80,6 @@ router.post("/:candidateID", async (req, res) => {
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: "Internal Server Error" });
-  }
-});
-
-// vote count
-router.get("/vote/count", async (req, res) => {
-  try {
-    // Find all candidates and sort them by voteCount in descending order
-    const candidate = await Candidate.find().sort({ voteCount: "desc" });
-
-    // Map the candidates to only return their name and voteCount
-    const voteRecord = candidate.map((data) => {
-      return {
-        name: data.name,
-        count: data.voteCount,
-      };
-    });
-
-    return res.status(200).json(voteRecord);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ error: "Internal Server Error" });
   }
 });
 

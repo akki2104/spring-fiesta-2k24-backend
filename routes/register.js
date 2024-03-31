@@ -5,9 +5,21 @@ const bodyParser = require("body-parser");
 const router = Router();
 router.use(bodyParser.json());
 
+router.get("/",(req,res) =>{
+  return res.render("register")
+})
+
 router.post("/", async (req, res) => {
   try {
     const { email, password } = req.body;
+
+    // check college email
+    if (email.slice(-16) != "@iiitsurat.ac.in") {
+      return res
+        .status(404)
+        .json({ error: "Only College Email is required!!!" });
+    }
+
     const user = await User.findOne({ email });
 
     if (user) {
@@ -20,7 +32,7 @@ router.post("/", async (req, res) => {
 
     return res.redirect("/login");
   } catch (error) {
-    console.log(error)
+    console.log(error);
     return res.status(404).json({
       error: "Incorrect Email or Password",
     });

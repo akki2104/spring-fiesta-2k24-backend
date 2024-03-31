@@ -7,6 +7,10 @@ const { createTokenForUser } = require("../controllers/authentication");
 const router = Router();
 router.use(bodyParser.json());
 
+router.get("/",(req,res) =>{
+  return res.render("login")
+})
+
 router.post("/", async (req, res) => {
   try {
     console.log(req.body);
