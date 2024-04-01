@@ -16,6 +16,11 @@ const candidate = require("./routes/candidate");
 
 connect();
 
+//testing live connecting connection
+app.get('/', (req, res) => {
+  res.send('Wohoo, backend is live now!!!');
+});
+
 app.use("/register", register);
 app.use("/login", login);
 app.use("/logout", logout);
