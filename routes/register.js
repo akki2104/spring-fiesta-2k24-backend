@@ -14,10 +14,11 @@ router.post("/", async (req, res) => {
     const { email, password } = req.body;
 
     // check college email
-    if (email.slice(-16) != "@iiitsurat.ac.in") {
-      return res
-        .status(404)
-        .json({ error: "Only College Email is required!!!" });
+    const pattern = /^ui(20|21|22|23|24)(ec|cs)([1-9]|[1-8][0-9]|90)@iiitsurat\.ac\.in$/;
+
+    // if the email matches the pattern
+    if (!pattern.test(email)) {
+      return res.status(400).json({ error: "Use College Email ID only" });
     }
 
     const user = await User.findOne({ email });
