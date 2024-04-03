@@ -5,9 +5,9 @@ const bodyParser = require("body-parser");
 const router = Router();
 router.use(bodyParser.json());
 
-router.get("/",(req,res) =>{
-  return res.render("register")
-})
+router.get("/", (req, res) => {
+  return res.render("register");
+});
 
 router.post("/", async (req, res) => {
   try {
@@ -30,7 +30,10 @@ router.post("/", async (req, res) => {
       password,
     });
 
-    return res.redirect("/login");
+    return res.status(200).json({
+      messsage: "Register Successful",
+      success: true,
+    });
   } catch (error) {
     console.log(error);
     return res.status(404).json({
