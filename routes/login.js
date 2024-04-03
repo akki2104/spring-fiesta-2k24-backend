@@ -7,9 +7,9 @@ const { createTokenForUser } = require("../controllers/authentication");
 const router = Router();
 router.use(bodyParser.json());
 
-router.get("/",(req,res) =>{
-  return res.render("login")
-})
+router.get("/", (req, res) => {
+  return res.render("login");
+});
 
 router.post("/", async (req, res) => {
   try {
@@ -31,14 +31,7 @@ router.post("/", async (req, res) => {
 
     const token = createTokenForUser(user);
 
-    return res
-      .cookie("token", token, {
-        httpOnly: true,
-      })
-      .json({
-        message: "Login successful",
-        success: true,
-      });
+    return res.json({ token: token, message: "successful" });
   } catch (error) {
     console.log(error);
     return res.status(404).json("/", {

@@ -3,6 +3,7 @@ const User = require("../models/user");
 const router = Router();
 const Candidate = require("../models/candidate.js");
 const { getDataFromToken } = require("../controllers/getDataFromCookie.js");
+const checkForAuthenticationCookie= require("../middlewares/authentication.js");
 
 router.get("/", async (req, res) => {
   try {
@@ -16,6 +17,7 @@ router.get("/", async (req, res) => {
       return {
         name: data.name,
         count: data.voteCount,
+        id:data._id
       };
     });
 
@@ -42,12 +44,11 @@ router.get("/", async (req, res) => {
 // })
 
 //user voting
-router.post("/:candidateID", async (req, res) => {
+router.post("/:candidateID", checkForAuthenticationCookie, async (req, res) => {
   // no admin can vote
   // user can only vote once
-
   const candidateID = req.params.candidateID;
-  const userId = getDataFromToken(req);
+  const userId = req.userAuth.id;
 
   try {
     // Find the Candidate document with the specified candidateID

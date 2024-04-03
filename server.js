@@ -5,9 +5,6 @@ const cors = require("cors");
 const port = process.env.PORT || 5000;
 const { connect } = require("./db/connect");
 const cookiePaser = require("cookie-parser");
-const {
-  checkForAuthenticationCookie,
-} = require("./middlewares/authentication");
 
 app.use(cors());
 // routes
@@ -29,7 +26,6 @@ app.use("/logout", logout);
 app.use("/candidate", candidate);
 
 app.use(cookiePaser());
-app.use(checkForAuthenticationCookie("token"));
 
 app.listen(port, () => {
   console.log(`The Website started successfully on port ${port}`);
