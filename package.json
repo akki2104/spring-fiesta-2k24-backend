@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "will contain server portion for spring fest's website 2k24",
   "main": "server.js",
-  "scripts": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
   "author": "Shradhesh",
   "license": "ISC",
   "dependencies": {
