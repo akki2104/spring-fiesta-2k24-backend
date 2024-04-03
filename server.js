@@ -10,14 +10,12 @@ app.use(cors());
 // routes
 const login = require("./routes/login");
 const register = require("./routes/register");
-const logout = require("./routes/logout");
 const candidate = require("./routes/candidate");
 
 connect();
 
 app.use("/register", register);
 app.use("/login", login);
-app.use("/logout", logout);
 app.use("/candidate", candidate);
 
 app.use(cookiePaser());

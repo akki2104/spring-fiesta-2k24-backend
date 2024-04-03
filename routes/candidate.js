@@ -2,22 +2,17 @@ const { Router } = require("express");
 const User = require("../models/user");
 const router = Router();
 const Candidate = require("../models/candidate.js");
-const { getDataFromToken } = require("../controllers/getDataFromCookie.js");
-const checkForAuthenticationCookie= require("../middlewares/authentication.js");
+const checkForAuthenticationCookie = require("../middlewares/authentication.js");
 
 router.get("/", async (req, res) => {
   try {
-    const data = await Candidate.find();
-    console.log("data fetch");
-    res.status(200).json(data);
     const candidate = await Candidate.find().sort({ voteCount: "desc" });
 
-    // Map the candidates to only return their name and voteCount
     const voteRecord = candidate.map((data) => {
       return {
         name: data.name,
         count: data.voteCount,
-        id:data._id
+        id: data._id,
       };
     });
 
@@ -45,8 +40,6 @@ router.get("/", async (req, res) => {
 
 //user voting
 router.post("/:candidateID", checkForAuthenticationCookie, async (req, res) => {
-  // no admin can vote
-  // user can only vote once
   const candidateID = req.params.candidateID;
   const userId = req.userAuth.id;
 
