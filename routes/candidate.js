@@ -7,9 +7,9 @@ const checkForAuthenticationCookie= require("../middlewares/authentication.js");
 
 router.get("/", async (req, res) => {
   try {
-    const data = await Candidate.find();
-    console.log("data fetch");
-    res.status(200).json(data);
+    // const data = await Candidate.find();
+    // console.log("data fetch");
+    // res.status(200).json(data);
     const candidate = await Candidate.find().sort({ voteCount: "desc" });
 
     // Map the candidates to only return their name and voteCount
