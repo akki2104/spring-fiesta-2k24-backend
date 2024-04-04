@@ -10,7 +10,7 @@ router.post("/", async (req, res) => {
     const { email, password } = req.body;
 
     // check college email
-    const pattern = /^ui(20|21|22|23|24)(ec|cs)([1-9]|[1-8][0-9]|90)@iiitsurat\.ac\.in$/;
+    const pattern = /^ui(20|21|22|23|24)(ec|cs)([0-8][1-9]|90)@iiitsurat\.ac\.in$/;
 
     // if the email matches the pattern
     if (!pattern.test(email)) {
