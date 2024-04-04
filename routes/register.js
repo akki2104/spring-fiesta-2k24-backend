@@ -5,10 +5,6 @@ const bodyParser = require("body-parser");
 const router = Router();
 router.use(bodyParser.json());
 
-router.get("/", (req, res) => {
-  return res.render("register");
-});
-
 router.post("/", async (req, res) => {
   try {
     const { email, password } = req.body;
