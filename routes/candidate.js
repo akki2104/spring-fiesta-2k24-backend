@@ -3,6 +3,7 @@ const User = require("../models/user");
 const router = Router();
 const Candidate = require("../models/candidate.js");
 const checkForAuthenticationCookie = require("../middlewares/authentication.js");
+const createTokenForUser = require("../controllers/authentication");
 
 router.get("/", async (req, res) => {
   try {
@@ -70,7 +71,13 @@ router.post("/:candidateID", checkForAuthenticationCookie, async (req, res) => {
     user.isVoted = true;
     await user.save();
 
-    return res.status(200).json({ message: "Vote recorded successfully" });
+    const token = createTokenForUser(user);
+
+    return res.status(200).json({
+      token: token,
+      success: true,
+      message: "Vote recorded successfully",
+    });
   } catch (err) {
     console.log(err);
     return res.status(500).json({ error: "Internal Server Error" });
