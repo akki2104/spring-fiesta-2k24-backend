@@ -8,6 +8,7 @@ const checkForAuthenticationCookie = async (req, res, next) => {
       errors: [
         {
           msg: "Token not found",
+          success: false,
         },
       ],
     });
@@ -22,6 +23,7 @@ const checkForAuthenticationCookie = async (req, res, next) => {
       errors: [
         {
           msg: "Invalid token",
+          success: false,
         },
       ],
     });

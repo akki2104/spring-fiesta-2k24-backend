@@ -48,18 +48,26 @@ router.post("/:candidateID", checkForAuthenticationCookie, async (req, res) => {
     // Find the Candidate document with the specified candidateID
     const candidate = await Candidate.findById(candidateID);
     if (!candidate) {
-      return res.status(404).json({ message: "Candidate not found" });
+      return res.status(404).json({ message: "Candidate not found",
+      success: false,
+     });
     }
 
     const user = await User.findById(userId);
     if (!user) {
-      return res.status(404).json({ message: "user not found" });
+      return res.status(404).json({ message: "user not found",
+      success: false,
+     });
     }
     if (user.role == "admin") {
-      return res.status(403).json({ message: "admin is not allowed" });
+      return res.status(403).json({ message: "admin is not allowed",
+      success: false,
+     });
     }
     if (user.isVoted) {
-      return res.status(400).json({ message: "You have already voted" });
+      return res.status(400).json({ message: "You have already voted" ,
+      success: false,
+    });
     }
 
     // Update the Candidate document to record the vote
