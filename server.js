@@ -6,7 +6,14 @@ const port = process.env.PORT || 5000;
 const { connect } = require("./db/connect");
 const cookiePaser = require("cookie-parser");
 
-app.use(cors());
+const corsOptions = {
+  origin: "https://springfiestaiiitsurat.in/",
+  credential: true,
+  method: ["GET", "POST"],
+};
+
+app.options("*",cors(corsOptions));
+app.use(cors(corsOptions));
 // routes
 const login = require("./routes/login");
 const register = require("./routes/register");
@@ -15,8 +22,8 @@ const candidate = require("./routes/candidate");
 connect();
 
 //testing live connecting connection
-app.get('/', (req, res) => {
-  res.send('Wohoo, backend is live now!!!');
+app.get("/", (req, res) => {
+  res.send("Wohoo, backend is live now!!!");
 });
 
 app.use("/register", register);
