@@ -7,7 +7,7 @@ const { connect } = require("./db/connect");
 const cookiePaser = require("cookie-parser");
 
 const corsOptions = {
-  origin: "https://springfiestaiiitsurat.in/",
+  origin: "https://springfiestaiiitsurat.in",
   credentials: true,
   method: ["GET", "POST"],
 };
