@@ -8,7 +8,7 @@ const cookiePaser = require("cookie-parser");
 
 const corsOptions = {
   origin: "https://springfiestaiiitsurat.in/",
-  credential: true,
+  credentials: true,
   method: ["GET", "POST"],
 };
 
